@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learning JavaScript</title>
+	<link rel="stylesheet" type="text/css" href="learnJavaScriptStyle.css">
+</head>
+<body>
+
+
+
+<button id = "textChanger" >Change the first div text</button>
+
+<div id = "firstDiv">Hi my name is Sayori</div>
+
+<button id = "textAppender"> Just click :)
+</button>
+
+<div id ="secondDiv"> Monika is </div>
+
+<button id = "textCreator"> </button>
+
+<div id = "emptyDiv">
+	
+</div>
+
+
+
+
+
+	<script type="text/javascript">
+		/*
+		So... ummm
+		*/
+		document.getElementById("textChanger").onclick=function() {
+			
+			document.getElementById("firstDiv").innerHTML = "hanged lol";
+		}
+		document.getElementById("textAppender").onclick=function(){
+			document.getElementById("secondDiv").innerHTML = document.getElementById("secondDiv").innerHTML + "yours! and will always be ";
+		}
+		document.getElementById("textCreator").onclick=function(){
+			document.getElementById("emptyDiv").innerHTML="<ul><li>Monika</li><li>Monika</li></ul>"
+		}
+
+	</script>
+
+</body>
+</html>
