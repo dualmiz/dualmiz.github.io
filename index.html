@@ -17,8 +17,8 @@
 		$.ajax({
 			url: "jQuery%20intro.html"
 		}).done(function(data){
-			alert(data)
-		})
+			$("body").append(data);
+		});
 	</script>
 
 </body>
