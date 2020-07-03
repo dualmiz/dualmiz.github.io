@@ -14,7 +14,11 @@
 	<h2>bababa</h2>
 	
 	<script>
-		$.get("test.html");
+		$.ajax({
+			url: "learn%20jQuery.html";
+		}).done(function(data){
+			alert(data)
+		})
 	</script>
 
 </body>
