@@ -1,16 +1,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>AJAX</title>
-	<style type="text/css">
-		body{
-			font-family: Verdana, sans-serif;
-		}
-	</style>
-	<script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<title>Code Player by Stefan</title>
+	<script type = "text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="codePlayerStyle.css" type = "text/css">
 </head>
 <body>
-	<h1>Asyncronous Javascript and XML</h1>
 
+<div id= "container">
+	<!--
+		Menu Bar
+	-->
+		<a href = "jQuery%20intro.html" id ="mystery">click me</a>
+		<div id = "header">
+				<div id = "logo">
+					CodePlayer
+				</div>
+				<div id = "codeSelection">
+					<ul>
+						<li class = "toggle selected">HTML</li>
+						<li class="toggle">CSS</li>
+						<li class="toggle">JavaScript</li>
+						<li class = "toggle selected">Result</li>
+					</ul>
+				</div>
+				<div id = "run">
+					<button id = "runButton">Run</button>					
+				</div>
+		</div>
+		<!--
+			Container for the code inputs
+		-->
+		<div id = "HTMLContainer" class = "chunk " num = "1">
+			<div class = "Label">HTML</div>
+			<textarea id = "htmlCode">Example Code</textarea>
+		</div>
+		<div id = "CSSContainer" class = "chunk containerToggle" num = "0">
+			<div class = "Label">CSS</div>
+			<textarea id = "cssCode">Example Code</textarea>
+		</div>
+		<div id = "JavaScriptContainer" class = "chunk containerToggle" num = "0">
+			<div class = "Label">JavaScript</div>
+			<textarea id = "jsCode">alert("Hello World")</textarea>
+		</div>
+		<div id = "ResultContainer" class = "chunk " num = "1">
+			<div class = "Label">Result</div>
+			<iframe id = "resultFrame"></iframe>
+		</div>
+	</div>
+
+
+</div>	
+
+
+<script type="text/javascript">
+	var chunkArray = ["HTML","CSS","JavaScript","Result"];
+	/// Calculating the size for the chunk height /// 
+	var windHeight = $(window).height();
+	var headerHeight = $("#header").height();
+	var chunkHeight = (windHeight - headerHeight) + "px";
+	$(".chunk").height(chunkHeight);
+	$("#container").height(windHeight) ;
+	/// ///
+	/// Toggling the display ///
+	$(".toggle").click(function(){
+		var whichBar = "#" + $(this).html() + "Container";
+		$(this).toggleClass("selected");
+		$(whichBar ).toggleClass("containerToggle");
+		/// Calculating the size for the chunk width /// 
+		var windWidth = $(window).width();
+		/* Other method of calculating the chunk width size
+		var divisionUnit =  $(whichBar).attr("num");
+		if (divisionUnit == 0){
+			$(whichBar).attr("num", 1)
+		} else{
+			$(whichBar).attr("num", 0)
+		};
+		var divisionValue = 0;
+		for (var i = 0; i < chunkArray.length; i++) {
+			divisionValue += Number($("#" + chunkArray[i] + "Container").attr("num")); 
+		};
+		*/ 
+		var showingDivs = $(".chunk").filter(function(){
+			return($(this).css("display") != "none");
+		}).length;
+		if (showingDivs == 0 ){
+			return 0
+		} else{
+			$(".chunk").width(windWidth/showingDivs);
+		};
+
+	});
+	/// ///
+	/// Running the code ///
+	$("#runButton").click(function(){
+		$("iframe").contents().find("html").html('<style>' + $("#cssCode").val() + '</style>' + $("#htmlCode").val());
+		document.getElementById("resultFrame").contentWindow.eval($("#jsCode").val());
+	});
+
+
+</script>
 </body>
 </html>
